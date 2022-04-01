@@ -1,0 +1,34 @@
+#!/usr/bin/with-contenv bashio
+# ==============================================================================
+# Start the Glome runtime add on service
+# s6-overlay docs: https://github.com/just-containers/s6-overlay
+# ==============================================================================
+
+gleam_version=$(gleam --version)
+
+bashio::log.info 'Starting the glome runtime...'
+bashio::log.info 'Runnig on ' $gleam_version
+
+export GLEAM_LOG=debug
+
+location_path="/config"
+if bashio::config.has_value 'location_path'; then
+    location_path=$(bashio::config 'location_path')
+fi
+
+folder_path="/glome"
+if bashio::config.has_value 'folder_path'; then
+    folder_path=$(bashio::config 'folder_path')
+fi
+
+project_path="/glome_automations"
+if bashio::config.has_value 'project_path'; then
+    project_path=$(bashio::config 'project_path')
+fi
+
+
+project_path="${location_path}${folder_path}${project_path}"
+
+## Run your program
+cd $project_path || bashio::exit.nok "Gleam project not found at path ${project_path}"
+s6-setuidgid root gleam run

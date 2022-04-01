@@ -1,0 +1,22 @@
+# https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config
+name: Glome runtime add-on
+version: "0.1.0"
+slug: glome
+description: Glome runtime add-on to serve automations applications writen in gleam with glome
+url: "https://github.com/dennisschroeder/glome-runtime"
+arch:
+  - amd64
+init: false
+map:
+  - config:rw
+  - share:rw
+  - ssl:rw
+  - addons:rw
+options:
+  location_path: "/config"
+  folder_path: "/glome"
+  project_path: "/glome_automations"
+schema:
+  location_path: "str"
+  folder_path: "str"
+  project_path: "str"

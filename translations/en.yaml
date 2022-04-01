@@ -1,0 +1,10 @@
+configuration:
+  location_path:
+    name: Location path
+    description: The location path where to find the code to run. Can be one of [/config, /share, /ssl, /addons
+  folder_path:
+    name: Folder path
+    description: The subfolder in the location directory where to find the glome project
+  project_path:
+    name: Project path
+    description: The project folder in the subfolder directory where to find the source code
